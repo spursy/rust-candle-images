@@ -22,8 +22,6 @@ fn main() -> anyhow::Result<()> {
     let vb = unsafe {
         VarBuilder::from_mmaped_safetensors(&[model], candle::DType::F32, &device)?
     };
-    let vb1 = vb.pp("image_encoder");
-    let _ = vb1.pp("patch_embed");
     let sam = sam::Sam::new(768, 12, 12, &[2, 5, 8, 11], vb)?; // sam_vit_b
     let points: Vec<String> = vec![];
     let iter_points = points.iter().map(|p| (p, true));
